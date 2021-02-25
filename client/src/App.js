@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import NoMatch from "./pages/NoMatch";
 import Jumbotron from "./components/Jumbotron/index";
-//import Search from "./pages/Search";
+import Search from "./pages/Search";
 import Nav from "./components/Nav/index";
 
 function App() {
@@ -12,9 +12,9 @@ function App() {
         <Nav/>
         <Jumbotron/>
         <Switch>
-          {/* <Route exact path={["/", "/search"]}>
+          <Route exact path={["/", "/search"]}>
             <Search />
-          </Route> */}
+          </Route>
           
           {/* <Route>
             <NoMatch />

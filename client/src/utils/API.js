@@ -1,26 +1,28 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
+//const URL =  
 
 export default {
     
-    googleBooks: function(query) {
-        return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+  loadBooks: function (query) {
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+  },
+    
+    saveBook: function(bookInfo) {
+        return axios.post("/api/books", bookInfo).then(result => result.data);
     },
     
-    saveBook: function(bookDetails) {
-        return axios.post("/api/books", bookDetails);
-    },
-    
+    //gets the saved books from the db
     getBooks: function() {
-        return axios.get("/api/books");
+        return axios.get("/api/books").then(result => result.data);
     },
     
-    getBook: function(id) {
-        return axios.get("/api/books/" + id);
-    },
+    // getBook: function(id) {
+    //     return axios.get("/api/books/" + id);
+    // },
     
     deleteBook: function(id) {
-        return axios.delete("/api/books/" + id);
+        return axios.delete("/api/books/" + id).then(result => result.data);
     }
 };
 
