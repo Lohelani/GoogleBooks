@@ -14,7 +14,7 @@ export default class List extends Component {
             title={bookInfo.volumeInfo.title}
             link={bookInfo.volumeInfo.previewLink}
             authors={bookInfo.volumeInfo.authors + ", "}
-            //image={bookInfo.volumeInfo.imageLinks.thumbnail}
+            image={bookInfo.volumeInfo.imageLinks.thumbnail}
             description={bookInfo.volumeInfo.description}
             //call bookRender from search.js 
             bookRender={this.props.bookRender}
