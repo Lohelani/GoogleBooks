@@ -1,11 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 import axios from "axios";
-//const URL =  
+
 
 export default {
-    
+    //50 results gives an error?
   loadBooks: function (query) {
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
+    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=25`);
   },
     
     saveBook: function(bookInfo) {

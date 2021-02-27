@@ -2,7 +2,8 @@ import React from "react"
 import { Component } from 'react';
 import API from "../utils/API";
 import { Form } from "../components/Form/index";
-import { List } from "../components/List";
+import List from "../components/List/index";
+import {Container} from "../components/Grid/index";
 //import ResultList from "../components/ResultList/index";
 
 class Search extends Component {
@@ -14,10 +15,10 @@ class Search extends Component {
     componentDidMount() {
         this.onSearch();
     }
-    //constructor method here instead of function because class component
+
     onSearch = (query) => {
         //tutor helped with this 
-
+        // When the form is submitted, use the API.saveBook method to save the book data
         API.loadBooks(query)
             .then(results => {
                 // event.preventDefault()
@@ -25,12 +26,12 @@ class Search extends Component {
                     books: results.data.items,
                     q: ""
                 },
-                console.log(results.data.items)
+                    console.log(results.data.items)
                 )
             }).catch(err => console.log(err));
     }
 
-    
+
     //     .then(res => this.setState({ books: res.data.items.map(bookInfo => this.bookRender(bookInfo)) }))
     //         .catch(err => console.error(err));
     // };
@@ -42,7 +43,7 @@ class Search extends Component {
     //   };
 
     handleInputChange = (event) => {
-        
+
         const name = event.target.name;
         const value = event.target.value;
         this.setState({ [name]: value })
@@ -53,11 +54,58 @@ class Search extends Component {
         event.preventDefault();
 
         this.onSearch(this.state.search);
-        console.log(this.state.search)
+        //console.log(event)
     };
 
-    //   // When the form is submitted, use the API.saveBook method to save the book data
-    //   // Then reload books from the database
+
+
+    bookRender = bookInfo => {
+        // console.log(bookInfo);
+        // API.saveBook(
+        return {
+            title: bookInfo.volumeInfo.title,
+            authors: bookInfo.volumeInfo.authors,
+            description: bookInfo.volumeInfo.description,
+            link: bookInfo.volumeInfo.infoLink,
+            image: bookInfo.volumeInfo.imageLinks.thumbnail,
+            _id: bookInfo.id
+        }
+        //)
+        //res? needs to be the equvalent of useEffect loadBooks? in this case onSearch/setState?
+        // .then(res => (res)).catch(err => console.log(err));
+    }
+
+    render() {
+        return (
+            <div>
+                <Container fluid>
+                    <Form search={this.state.search}
+                        handleInputChange={this.handleInputChange}
+                        name="title"
+                        placeholder="Title"
+                        handleFormSubmit={this.handleFormSubmit}
+                    />
+
+
+                    {this.state.books.length ? (
+                        <List
+                            newBookState={this.state.books}
+                            bookRender={this.bookRender}>
+                        </List>
+                    )
+                    : (
+                        <div>No books to display </div>
+                    )}
+                </Container>
+            </div>
+        )
+    }
+}
+
+
+export default Search
+
+ //   // Then reload books from the database
     //   function handleFormSubmit(event) {
     //     event.preventDefault();
     //     if (formObject.title && formObject.author) {
@@ -70,60 +118,6 @@ class Search extends Component {
     //         .catch(err => console.log(err));
     //     }
     //   };
-
-    bookRender = bookInfo => {
-        // console.log(bookInfo);
-        // API.saveBook(
-           return {
-            // title: bookInfo.title,
-            // author: bookInfo.author,
-            // description: bookInfo.description,
-            // link: bookInfo.link,
-            // image: bookInfo.image,
-            // id: bookInfo.id
-            title: bookInfo.volumeInfo.title,
-            authors: bookInfo.volumeInfo.authors,
-            description: bookInfo.volumeInfo.description,
-            link: bookInfo.volumeInfo.infoLink,
-            image: bookInfo.volumeInfo.imageLinks.thumbnail,
-            _id: bookInfo.id
-        }
-        //)
-            //res? needs to be the equvalent of useEffect loadBooks? in this case onSearch/setState?
-            // .then(res => (res)).catch(err => console.log(err));
-    }
-
-    render() {
-        return (
-            <div>
-                
-                    <Form search={this.state.search}
-                        handleInputChange={this.handleInputChange}
-                        name="title"
-                        placeholder="Title"
-                        handleFormSubmit={this.handleFormSubmit}
-                    />
-                
-
-                {this.state.books.length ? (
-                    <List
-                        newBookState={this.state.books}
-                        bookRender={this.bookRender}>
-                    </List>
-                ) 
-                : (
-                        <div>
-                            {/* <h2>No results to display</h2> */}
-                        </div>
-                    )}
-            </div>
-        )
-    }
-}
-
-
-
-export default Search
 
 // import React, { useState, useEffect } from "react";
 // import DeleteBtn from "../components/DeleteBtn";
