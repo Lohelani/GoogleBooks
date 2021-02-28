@@ -8,10 +8,10 @@ function Navigation() {
         <Navbar bg="dark" variant="dark">
           <Nav className="mr-auto">
             <Nav.Link href="/search">
-            <Button variant="primary">Search</Button>{' '}
+            <Button variant="primary">Search</Button>
             </Nav.Link>
             <Nav.Link href="/saved">
-            <Button variant="primary">Saved</Button>{' '}
+            <Button variant="primary">View Saved Books</Button>
             </Nav.Link>
           </Nav>
         </Navbar>

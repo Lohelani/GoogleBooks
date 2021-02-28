@@ -23,14 +23,13 @@ class ListItem extends Component {
 
             <div>
                 <div className="card">
-                    <div className="card-header"></div>
-                    <div className="card-body">
+                    <div>
                         <img src={this.props.image}/>
-                        <p className="card-title">{this.props.title}</p>
-                        <p className="card-text" >{this.props.description}</p>
+                        <p>{this.props.title}</p>
+                        <p>{this.props.description}</p>
                         <p>By: {this.props.authors}</p>
                         <a href={this.props.link} target="_blank" className="btn">View this Book on Google</a>
-                        <button onClick={this.handleSearch} className="btn">Save Book</button>
+                        <button onClick={this.handleSearch} className="btn">Save this Book</button>
                     </div>
                 </div>
             </div>
